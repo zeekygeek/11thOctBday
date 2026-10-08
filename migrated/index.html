@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A little birthday surprise</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  
+  <!-- Audio Element -->
+  <audio id="bg-audio" loop preload="none"></audio>
+
+  <!-- Login Shell -->
+  <main id="login-shell" class="login-shell">
+    <section class="login-card" aria-labelledby="login-title">
+      <div class="login-content">
+        <h1 id="login-title">
+          You're invited,<br />
+          <span id="recipient-name-login"></span>
+        </h1>
+        <p class="login-intro">Your birthday surprise is waiting.</p>
+        <form class="login-form" id="login-form">
+          <label for="birthday-password">Password</label>
+          <div class="password-field">
+            <input
+              id="birthday-password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Enter password"
+              required
+            />
+            <button
+              class="password-visibility"
+              type="button"
+              id="toggle-password-btn"
+              aria-label="Show password"
+            >
+              <i data-lucide="eye" id="toggle-password-icon"></i>
+            </button>
+          </div>
+          <p class="login-error" id="login-error" role="alert" style="display: none;"></p>
+          <button class="login-submit" type="submit">
+            Open your surprise <i data-lucide="arrow-right"></i>
+          </button>
+        </form>
+      </div>
+      <div
+        class="login-art"
+        role="img"
+        aria-label="A colorful birthday cake illustration with the date 11th November printed on the canvas"
+      >
+        <img
+          src="birthday-cover.png"
+          alt=""
+          style="position: absolute; width: 100%; height: 100%;"
+        />
+        <span class="login-art-stamp" aria-hidden="true" id="login-date"></span>
+      </div>
+    </section>
+  </main>
+
+  <!-- Gift Shell -->
+  <main id="gift-shell" class="gift-shell chapter-cover" style="display: none;">
+    <div id="confetti-container" class="confetti-burst" aria-hidden="true"></div>
+    <div class="ambient-glow" aria-hidden="true"></div>
+    
+    <header class="gift-header" id="gift-header">
+      <a class="wordmark" href="#top" id="wordmark-link" aria-label="Return to the beginning">
+        <i data-lucide="party-popper" class="wordmark-mark"></i>
+        <span>A little birthday surprise</span>
+      </a>
+      <div class="header-right" id="header-right">
+        <button class="sound-button" type="button" id="sound-toggle" style="display: none;">
+          <i data-lucide="volume-x" id="sound-icon"></i>
+          <span id="sound-text">Sound off</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="chapter-date-art" id="chapter-date-art" aria-hidden="true" style="display: none;">
+      <span class="chapter-date-day" id="chapter-day"></span>
+      <span class="chapter-date-month" id="chapter-month"></span>
+    </div>
+    
+    <div class="chapter-back-row" id="chapter-back-row" style="display: none;">
+      <button class="chapter-back" type="button" id="chapter-back-btn" aria-label="Back">
+        <i data-lucide="arrow-left"></i>
+      </button>
+    </div>
+
+    <!-- Chapter: Cover -->
+    <section class="cover-scene" id="chapter-cover" aria-labelledby="cover-title">
+      <div class="cover-copy">
+        <p class="eyebrow">
+          <span class="eyebrow-dash"></span> TODAY IS ALL ABOUT YOU
+        </p>
+        <h1 id="cover-title">
+          Happy birthday,<br />
+          <span id="recipient-name-cover"></span>
+        </h1>
+        <p class="cover-intro" id="cover-intro"></p>
+        <button class="open-gift-button" type="button" id="open-gift-btn">
+          <span>Open your surprise</span>
+          <i data-lucide="arrow-right"></i>
+        </button>
+        <p class="cover-whisper">
+          Cake calories don't count today.
+        </p>
+      </div>
+      <div class="cover-art-wrap">
+        <span class="party-balloon balloon-one" aria-hidden="true"></span>
+        <span class="party-balloon balloon-two" aria-hidden="true"></span>
+        <div class="cover-art" id="cover-art">
+          <img src="birthday-cover.png" alt="Birthday cake" style="position: absolute; width: 100%; height: 100%;" />
+          <div class="cover-art-overlay"></div>
+          <span class="cover-art-sticker">
+            <i data-lucide="cake-slice"></i> Let's celebrate!
+          </span>
+          <div class="cover-art-caption">
+            <span>MADE WITH LOVE</span>
+            <span>A VERY HAPPY BIRTHDAY</span>
+          </div>
+        </div>
+        <span class="art-side-note">A whole lot of happy.</span>
+      </div>
+      <div class="cover-bottom">
+        <span>TAKE YOUR TIME</span>
+        <span>
+          SCROLL ISN'T REQUIRED <i data-lucide="arrow-down"></i>
+        </span>
+      </div>
+    </section>
+
+    <!-- Chapter: Note -->
+    <section class="chapter-scene note-scene" id="chapter-note" aria-labelledby="note-title" style="display: none;">
+      <div class="chapter-aside">
+        <span class="eyebrow">
+          <span>A NOTE, JUST FOR YOU</span>
+          <span class="aside-index">
+            <span aria-hidden="true">—</span> 01-04
+          </span>
+        </span>
+      </div>
+      <div class="note-content">
+        <p class="eyebrow note-to" id="note-to"></p>
+        <h2 id="note-title" class="note-line"></h2>
+        <div class="note-lower">
+          <span class="handwritten-mark">
+            A little pause, between the lines.
+          </span>
+        </div>
+        <div class="line-progress" id="note-progress" aria-label="Note progress"></div>
+        <button class="scene-next" type="button" id="note-next-btn">
+          <span id="note-next-text">Next line</span> <i data-lucide="arrow-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- Chapter: Film -->
+    <section class="chapter-scene film-scene" id="chapter-film" aria-labelledby="film-title" style="display: none;">
+      <div class="chapter-aside">
+        <span class="eyebrow">
+          <span>SOMETHING TO WATCH</span>
+          <span class="aside-index">
+            <span aria-hidden="true">—</span> 02-04
+          </span>
+        </span>
+      </div>
+      <div class="film-content">
+        <div class="film-heading">
+          <p class="eyebrow">A LITTLE DETOUR</p>
+          <h2 id="film-title">
+            <span id="film-title-text"></span><span>.</span>
+          </h2>
+          <p id="film-desc"></p>
+        </div>
+        <button class="film-frame" type="button" id="film-frame-btn" aria-label="Open fullscreen film">
+          <img id="film-poster" src="" alt="Sample still for the personal birthday video" style="position: absolute; width: 100%; height: 100%;" />
+          <span class="film-frame-shade"></span>
+          <span class="play-button" aria-hidden="true" id="film-play-icon" style="display: none;">▶</span>
+          <span class="film-placeholder-label" id="film-placeholder-label" style="display: none;">YOUR FILM GOES HERE</span>
+          <span class="film-frame-note" id="film-frame-note"></span>
+        </button>
+        <div class="film-footer">
+          <span>Just you, me, and a few seconds.</span>
+        </div>
+        <button class="scene-next" type="button" id="film-next-btn" aria-label="Continue to your memories">
+          Continue <i data-lucide="arrow-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- Chapter: Memories -->
+    <section class="chapter-scene memories-scene" id="chapter-memories" aria-labelledby="memories-title" style="display: none;">
+      <div class="chapter-aside">
+        <span class="eyebrow">
+          <span>A FEW THINGS I KEPT</span>
+          <span class="aside-index">
+            <span aria-hidden="true">—</span> 03-04
+          </span>
+        </span>
+      </div>
+      <div id="memory-stage" class="memory-stage">
+        <div class="memory-heading">
+          <p class="eyebrow">Memories</p>
+          <h2 id="memories-title">
+            A few of <em>us.</em>
+          </h2>
+        </div>
+        <figure class="memory-photo" id="memory-photo" style="cursor: zoom-in;">
+          <img id="memory-img" src="" alt="" style="position: absolute; width: 100%; height: 100%;" draggable="false" />
+          <span class="photo-number" id="memory-number"></span>
+          <span class="photo-tap-hint">TAP TO EXPAND</span>
+        </figure>
+        <div class="memory-caption" id="memory-caption-container">
+          <p class="caption-main" id="memory-caption-main"></p>
+          <p class="caption-note" id="memory-caption-note"></p>
+        </div>
+        <div class="memory-controls">
+          <button type="button" id="memory-prev-btn" aria-label="Previous memory">
+            <i data-lucide="arrow-left"></i>
+          </button>
+          <div class="memory-dots" role="group" aria-label="Choose a memory" id="memory-dots-container"></div>
+          <button type="button" id="memory-next-btn" aria-label="Next memory">
+            <i data-lucide="arrow-right"></i>
+          </button>
+        </div>
+        <button class="memory-finish" type="button" id="memory-finish-btn" style="display: none;">
+          One last thing <i data-lucide="arrow-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- Chapter: Ending -->
+    <section class="ending-scene" id="chapter-ending" aria-labelledby="ending-title" style="display: none;">
+      <div class="ending-memory">
+        <img id="ending-img" src="" alt="" style="position: absolute; width: 100%; height: 100%;" />
+      </div>
+      <div class="ending-wash"></div>
+      <div class="ending-message">
+        <p class="eyebrow">AND MOST OF ALL</p>
+        <h2 id="ending-title">
+          Happy birthday,<br />
+          <em id="recipient-name-ending"></em>
+        </h2>
+        <span class="ending-rule"></span>
+        <p class="signoff" id="ending-signoff"></p>
+        <p class="signature" id="ending-signature"></p>
+        <button class="ending-restart" type="button" id="ending-restart-btn">
+          Start over <i data-lucide="arrow-right"></i>
+        </button>
+        <p class="ending-footnote">Enjoy your day</p>
+      </div>
+    </section>
+
+    <footer class="gift-footer" id="gift-footer">
+      <span id="footer-made-for"></span>
+      <div class="footer-progress" aria-label="Chapter progress" id="footer-progress">
+      </div>
+      <span class="footer-small" id="footer-date"></span>
+    </footer>
+  </main>
+
+  <!-- Modals -->
+  <div id="video-modal" class="video-lightbox cinema-lightbox" style="display: none;" role="dialog" aria-modal="true" aria-label="Birthday film fullscreen">
+    <div class="lightbox-header">
+      <span class="lightbox-badge">BIRTHDAY FILM</span>
+      <button class="video-close" type="button" id="close-video-btn">
+        Close <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="cinema-frame" id="cinema-frame-container">
+      <!-- Video or placeholder will be injected here -->
+    </div>
+  </div>
+
+  <div id="photo-modal" class="video-lightbox coverflow-modal" style="display: none;" role="dialog" aria-modal="true" aria-label="Cover Flow photo gallery">
+    <div class="coverflow-top-bar">
+      <div class="coverflow-title-wrap">
+        <span class="coverflow-label">Cover Flow</span>
+        <span class="coverflow-counter" id="photo-modal-counter"></span>
+      </div>
+      <button class="video-close" type="button" id="close-photo-btn">
+        Close <span aria-hidden="true">×</span>
+      </button>
+    </div>
+
+    <button class="lightbox-nav lightbox-prev" type="button" id="photo-modal-prev">
+      <i data-lucide="arrow-left"></i>
+    </button>
+
+    <div class="coverflow-stage" id="coverflow-stage">
+      <div class="coverflow-track" id="coverflow-track"></div>
+      <div class="coverflow-caption-block" id="coverflow-caption-block">
+        <p class="coverflow-caption-main" id="coverflow-caption-main"></p>
+        <p class="coverflow-caption-sub" id="coverflow-caption-sub"></p>
+      </div>
+    </div>
+
+    <button class="lightbox-nav lightbox-next" type="button" id="photo-modal-next">
+      <i data-lucide="arrow-right"></i>
+    </button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
