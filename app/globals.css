@@ -1601,8 +1601,8 @@ a:focus-visible {
     letter-spacing: 0.12em;
   }
   .chapter-date-art { top: 66px; right: 18px; }
-  .chapter-date-day { font-size: 42px; }
-  .chapter-date-month { font-size: 9px; letter-spacing: 0.3em; }
+  .chapter-date-day { font-size: 9.9vh; }
+  .chapter-date-month { font-size: 1.6vh; letter-spacing: 0.3em; }
   .aside-rule {
     width: 18px;
     height: 3px;
@@ -2109,10 +2109,11 @@ a:focus-visible {
     right: 12px;
   }
   .stamp-day {
-    font-size: clamp(28px, 9vw, 40px);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: clamp(28px, 14vw, 40px);
   }
   .stamp-month {
-    font-size: 9px;
+    font-size: 4vw;
     letter-spacing: 0.24em;
   }
   .login-content {
