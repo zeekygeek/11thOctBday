@@ -367,31 +367,54 @@ a:focus-visible {
   height: 15px;
   stroke-width: 2.5;
 }
+/* main stamp definition */
 .login-art-stamp {
   position: absolute;
-  z-index: 1;
-  padding: 6px 8px 5px;
-  border: 1px solid rgba(82, 67, 42, 0.3);
-  border-radius: 1px;
-  background: rgba(255, 244, 213, 0.96);
-  box-shadow: 0 2px 5px rgba(40, 49, 95, 0.15);
-  color: #51452e;
-  font-family: Georgia, serif;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.13em;
+  z-index: 2;
+  bottom: 18px;
+  right: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   line-height: 1;
-  transform: rotate(-2deg);
-}
-.login-art-stamp::before {
-  position: absolute;
-  inset: 3px;
-  border: 1px solid rgba(82, 67, 42, 0.19);
-  content: "";
   pointer-events: none;
 }
-/* Luxury Editorial Date Typography */
-/* Cohesive Artistic Birthday Date Typography */
+.stamp-day {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(36px, 7vw, 54px);
+  font-weight: 700;
+  font-style: italic;
+  color: #fff;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+}
+.stamp-ord {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 0.38em;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.85);
+  vertical-align: super;
+}
+.stamp-month {
+  font-family: var(--display);
+  font-size: clamp(9px, 1.6vw, 11px);
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  margin-top: 3px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+.login-art-stamp::before {
+  display: none;
+}
+
+/* ── Chapter date — top-right editorial badge ── */
 .chapter-date-art {
   position: absolute;
   z-index: 2;
@@ -402,43 +425,60 @@ a:focus-visible {
   align-items: flex-end;
   pointer-events: none;
   user-select: none;
-  line-height: 1;
+  gap: 0;
 }
 .chapter-date-day {
-  display: flex;
+  display: inline-flex;
   align-items: baseline;
-  font-family: var(--display);
-  font-size: clamp(40px, 5.5vw, 56px);
-  font-weight: 900;
-  letter-spacing: -0.04em;
+  gap: 2px;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(44px, 6vw, 64px);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.03em;
   color: var(--accent);
-  line-height: 0.85;
-  text-shadow: 2px 2px 0 rgba(255, 212, 71, 0.45);
+  line-height: 0.88;
 }
 .chapter-date-day sup {
-  font-size: 0.42em;
-  font-weight: 800;
-  color: var(--blue);
-  top: -0.6em;
-  margin-left: 2px;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 0.35em;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink);
+  opacity: 0.7;
+  vertical-align: super;
+  letter-spacing: 0;
+  margin-left: 1px;
+}
+/* thin rule between number and month */
+.chapter-date-art::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to left, var(--accent), transparent);
+  margin: 5px 0 4px;
+  opacity: 0.45;
 }
 .chapter-date-month {
   display: block;
   font-family: var(--display);
-  font-size: clamp(12px, 1.4vw, 14px);
+  font-size: clamp(9px, 1.1vw, 11px);
   font-weight: 900;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--ink);
-  margin-top: 4px;
-  padding-right: 2px;
+  opacity: 0.65;
+  padding-right: 1px;
 }
 .chapter-ending .chapter-date-day {
   color: #ffd477;
-  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
 }
 .chapter-ending .chapter-date-day sup {
-  color: #fff1cf;
+  color: rgba(255, 249, 235, 0.8);
+}
+.chapter-ending .chapter-date-art::after {
+  background: linear-gradient(to left, #ffd477, transparent);
 }
 .chapter-ending .chapter-date-month {
   color: #fff9eb;
@@ -600,7 +640,6 @@ a:focus-visible {
 }
 .note-line {
   max-width: 700px;
-  min-height: 2.25em;
   margin: 0;
   color: var(--ink);
   font-family: var(--hand);
@@ -616,13 +655,44 @@ a:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  margin-top: clamp(30px, 6vh, 60px);
+  margin-top: 12px;
+  overflow: hidden;
+}
+.note-footer {
+  margin: 20px 0 0;
+  color: var(--ink);
+  font-family: var(--date-brush), cursive;
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  animation: reveal-up 0.55s 0.18s cubic-bezier(0.2, 0.65, 0.25, 1) both;
+}
+.note-body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(16px, 1.7vw, 20px);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.75;
+  animation: reveal-up 0.55s 0.1s cubic-bezier(0.2, 0.65, 0.25, 1) both;
 }
 .handwritten-mark {
   color: var(--blue);
   font-family: poppins;
   font-size: 15px;
   font-weight: 700;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
+  width: 100%;
+}
+.handwritten-mark pre {
+  margin: 0;
+  font: inherit;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 .text-link {
   display: inline-flex;
@@ -839,46 +909,72 @@ a:focus-visible {
   position: relative;
   grid-row: 2 / 4;
   width: 100%;
-  height: clamp(250px, 43vh, 410px);
+  height: clamp(240px, 40vh, 400px);
   overflow: hidden;
   margin: 0;
-  border: 5px solid white;
+  border: 4px solid white;
   border-radius: 24px;
-  background: var(--blue);
+  background: transparent;
   box-shadow:
     0 8px 0 rgba(88, 111, 194, 0.19),
     0 17px 35px rgba(40, 49, 95, 0.12);
   animation: reveal-up 0.5s cubic-bezier(0.2, 0.65, 0.25, 1) both;
   transition: transform 0.3s ease;
 }
-.memory-photo img {
-  /* object-fit: cover; */
+/* morphed image bleed — blurred, scaled-up copy of the photo fills the letterbox */
+.memory-photo::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background-image: var(--img-src);
+  background-size: cover;
+  background-position: center;
+  filter: blur(28px) saturate(1.6) brightness(1.05);
+  transform: scale(1.08);
+  z-index: 0;
+  border-radius: inherit;
+}
+/* subtle darkening vignette over the bleed so real image pops */
+.memory-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(ellipse at center, transparent 38%, rgba(20, 20, 40, 0.22) 100%);
+}
+.memory-photo img {
+  object-fit: contain;
+  object-position: center;
+  pointer-events: none;
+  position: relative;
+  z-index: 2;
   transition: transform 0.6s ease;
 }
 .memory-photo:hover {
-  transform: perspective(900px) rotateY(-2deg) rotateX(1deg);
+  transform: perspective(900px) rotateY(-1deg) rotateX(0.5deg);
 }
 .memory-photo:hover img {
-  transform: scale(1.03);
+  transform: scale(1.01);
 }
 .memory-photo.is-dragging img {
-  transform: scale(1.04);
+  transform: scale(1.01);
 }
 .memory-quiet .memory-photo {
-  width: 76%;
-  height: clamp(230px, 37vh, 350px);
+  width: 100%;
+  height: clamp(240px, 40vh, 400px);
   justify-self: center;
 }
 .memory-close .memory-photo {
-  width: 90%;
-  height: clamp(230px, 38vh, 360px);
-  justify-self: end;
+  width: 100%;
+  height: clamp(240px, 40vh, 400px);
+  justify-self: stretch;
 }
 .photo-number,
 .photo-tap-hint {
   position: absolute;
-  z-index: 1;
+  z-index: 4;
   bottom: 13px;
   color: white;
   font-size: 8px;
@@ -1006,135 +1102,191 @@ a:focus-visible {
   flex: 1;
   place-items: center;
   overflow: hidden;
-  background: linear-gradient(135deg, #c77c51 0%, #a85d43 42%, #75423b 100%);
+  background: linear-gradient(135deg, #fce8d0 0%, #f5cba7 50%, #e8a87c 100%);
   animation: fade-in 0.7s ease both;
 }
 .ending-memory {
   position: absolute;
   inset: 0;
-  opacity: 0.16;
+  opacity: 0.12;
 }
 .ending-memory img {
   object-fit: cover;
-  object-position: center 53%;
-  animation: ending-image 18s ease-in-out infinite alternate;
+  object-position: center 40%;
+  animation: ending-image 22s ease-in-out infinite alternate;
 }
 .ending-wash {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(
-      ellipse at 50% 38%,
-      rgba(242, 179, 111, 0.22),
-      transparent 52%
-    ),
-    linear-gradient(145deg, rgba(173, 99, 63, 0.38), rgba(74, 45, 39, 0.72)),
-    radial-gradient(
-      circle at 13% 22%,
-      rgba(255, 212, 71, 0.46) 0 4px,
-      transparent 5px
-    ),
-    radial-gradient(
-      circle at 82% 20%,
-      rgba(255, 142, 181, 0.5) 0 5px,
-      transparent 6px
-    ),
-    radial-gradient(
-      circle at 85% 75%,
-      rgba(112, 222, 192, 0.45) 0 4px,
-      transparent 5px
-    );
+    radial-gradient(ellipse at 60% 20%, rgba(255, 212, 71, 0.18), transparent 55%),
+    radial-gradient(ellipse at 10% 80%, rgba(255, 142, 181, 0.12), transparent 45%);
 }
 .ending-message {
   position: relative;
-  width: min(720px, calc(100% - 36px));
-  padding: clamp(30px, 5vw, 58px) clamp(20px, 5vw, 48px);
-  border: 4px solid rgba(255, 255, 255, 0.94);
+  z-index: 2;
+  width: min(600px, calc(100% - 40px));
+  padding: clamp(32px, 5vw, 56px) clamp(28px, 5vw, 52px);
+  border: 3px solid rgba(255, 255, 255, 0.9);
   border-radius: 28px;
-  background: rgba(255, 249, 235, 0.97);
+  background: rgba(255, 249, 235, 0.92);
   box-shadow:
-    0 10px 0 rgba(75, 45, 38, 0.2),
-    0 24px 60px rgba(57, 35, 32, 0.2);
+    0 8px 0 rgba(190, 110, 70, 0.18),
+    0 20px 50px rgba(140, 80, 50, 0.15);
   text-align: center;
   animation: reveal-up 0.9s 0.15s cubic-bezier(0.2, 0.65, 0.25, 1) both;
+  overflow: hidden;
 }
-.ending-message .eyebrow {
+/* subtle paper grain texture on the card */
+.ending-message::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.28;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23paper)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+.ending-eyebrow {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 25px;
+  gap: 12px;
+  margin: 0 0 22px;
+  font-family: var(--display);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
   color: var(--accent);
+  text-transform: uppercase;
+}
+.ending-eyebrow-line {
+  flex: 0 0 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+  opacity: 0.45;
 }
 .ending-message h2 {
   margin: 0;
   color: var(--ink);
   font-family: var(--display);
-  font-size: clamp(52px, 8.7vw, 104px);
+  font-size: clamp(48px, 8.5vw, 96px);
   font-weight: 900;
-  line-height: 0.99;
-  letter-spacing: -0.065em;
-  text-shadow: none;
+  line-height: 0.97;
+  letter-spacing: -0.06em;
 }
-.ending-message h2 em {
-  color: #d66b50;
+.ending-name {
+  margin: 6px 0 0;
+  color: var(--accent);
+  font-family: var(--display);
+  font-size: clamp(32px, 5.5vw, 62px);
   font-weight: 900;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.04em;
 }
-.ending-rule {
+/* rule — sits above the texture layer */
+.ending-message::after {
+  content: "";
   display: block;
-  width: 44px;
-  height: 5px;
-  margin: 33px auto 18px;
-  border-radius: 5px;
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 4px;
+  border-radius: 4px;
   background: var(--pink);
+  margin: 26px auto 20px;
 }
 .signoff {
   margin: 0;
   color: #526097;
-  font-family: var(--hand);
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.5;
+  font-family: var(--date-brush), cursive;
+  font-size: clamp(17px, 2.5vw, 22px);
+  font-weight: 500;
+  line-height: 1.6;
 }
 .signature {
-  margin: 17px 0 0;
-  color: #b85e49;
-  font-family: var(--hand);
-  font-size: 16px;
-  font-weight: 800;
+  margin: 10px 0 0;
+  color: var(--accent);
+  font-family: var(--date-brush), cursive;
+  font-size: clamp(18px, 2.8vw, 24px);
+  font-weight: 700;
+}
+.ending-actions {
+  margin-top: 28px;
+}
+.ending-restart {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 4px 0 #c52c58, 0 8px 20px rgba(202, 55, 99, 0.2);
+  color: white;
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: 11px;
+  font-weight: 900;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.ending-restart:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #c52c58, 0 6px 14px rgba(202, 55, 99, 0.2);
+}
+.ending-restart svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.5;
 }
 .ending-footnote {
-  margin: 16px 0 0;
+  margin: 18px 0 0;
   color: var(--muted);
-  font-size: 10px;
-  text-align: center;
+  font-family: var(--display);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.7;
 }
 .gift-shell.chapter-ending {
-  background: linear-gradient(135deg, #c77c51 0%, #a85d43 42%, #75423b 100%);
+  background: linear-gradient(135deg, #fce8d0 0%, #f5cba7 50%, #e8a87c 100%);
 }
 .chapter-ending .gift-header,
 .chapter-ending .gift-footer {
-  border-color: rgba(255, 249, 235, 0.3);
-  background: rgba(96, 57, 43, 0.92);
+  border-color: rgba(190, 110, 70, 0.2);
+  background: rgba(252, 232, 208, 0.88);
 }
 .chapter-ending .wordmark,
 .chapter-ending .chapter-indicator,
 .chapter-ending .gift-footer,
 .chapter-ending .footer-small {
-  color: #fff9eb;
+  color: var(--ink);
 }
 .chapter-ending .footer-progress span {
-  background: rgba(255, 249, 235, 0.36);
+  background: rgba(40, 49, 95, 0.14);
 }
 .chapter-ending .footer-progress span.is-active {
-  background: #ffd477;
+  background: var(--accent);
 }
-/* chapter ending uses the same calendar art */
-.chapter-ending .ending-restart {
-  border-color: #d66b50;
-  background: #d66b50;
-  box-shadow: 0 4px 0 #a64e3c;
-  color: white;
+.chapter-ending .chapter-date-day {
+  color: var(--accent);
 }
-.chapter-ending .ending-restart:hover {
-  background: #bd5944;
+.chapter-ending .chapter-date-day sup {
+  color: var(--ink);
+  opacity: 0.6;
+}
+.chapter-ending .chapter-date-art::after {
+  background: linear-gradient(to left, var(--accent), transparent);
+}
+.chapter-ending .chapter-date-month {
+  color: var(--ink);
 }
 
 .confetti-burst {
@@ -1449,8 +1601,8 @@ a:focus-visible {
     letter-spacing: 0.12em;
   }
   .chapter-date-art { top: 66px; right: 18px; }
-  .chapter-date-day { font-size: 46px; }
-  .chapter-date-month { font-size: 11px; letter-spacing: 0.22em; }
+  .chapter-date-day { font-size: 42px; }
+  .chapter-date-month { font-size: 9px; letter-spacing: 0.3em; }
   .aside-rule {
     width: 18px;
     height: 3px;
@@ -1476,6 +1628,12 @@ a:focus-visible {
     flex-direction: column;
     gap: 9px;
     margin-top: 26px;
+  }
+  .note-footer {
+    font-size: clamp(20px, 10vw, 28px);
+  }
+  .note-body {
+    font-size: 15px;
   }
   .handwritten-mark {
     font-size: 13px;
@@ -1556,7 +1714,7 @@ a:focus-visible {
   .memory-close .memory-photo {
     grid-row: auto;
     width: 100%;
-    height: clamp(210px, 37svh, 320px);
+    height: clamp(240px, 40svh, 340px);
     justify-self: stretch;
     border-width: 4px;
     border-radius: 21px;
@@ -1587,27 +1745,25 @@ a:focus-visible {
   }
   .ending-scene {
     min-height: calc(100svh - 114px);
+    place-items: center;
   }
   .ending-message {
-    padding: 30px 16px;
+    padding: 24px 20px 28px;
   }
   .ending-message h2 {
-    font-size: clamp(46px, 14vw, 72px);
+    font-size: clamp(44px, 13vw, 68px);
   }
-  .ending-message .eyebrow {
-    margin-bottom: 19px;
-  }
-  .ending-rule {
-    margin: 24px auto 14px;
+  .ending-name {
+    font-size: clamp(28px, 9vw, 48px);
   }
   .signoff {
     font-size: 17px;
   }
   .signature {
-    font-size: 14px;
+    font-size: 18px;
   }
-  .ending-footnote {
-    bottom: 14px;
+  .ending-actions {
+    margin-top: 22px;
   }
 }
 @media (max-width: 340px) {
@@ -1708,24 +1864,17 @@ a:focus-visible {
   background: var(--blue);
 }
 .login-art img {
-  /* object-fit: cover; */
-  width : 20px;
-  height: 20px;
-  /* object-position: center; */
-  /* scale: 0.8x; */
+  object-fit: fill;
+  object-position: center 0%;
+  transform: scale(1);
+  transform-origin: center 50%;
 }
 .login-art::after {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(40, 49, 95, 0.12), transparent 34%);
+  background: linear-gradient(160deg, transparent 40%, rgba(40, 49, 95, 0.55) 100%);
   content: "";
   pointer-events: none;
-}
-.login-art-stamp {
-  right: 16px;
-  bottom: 18px;
-  padding: 7px 10px 6px;
-  font-size: 10px;
 }
 .login-form {
   display: flex;
@@ -1920,22 +2069,23 @@ a:focus-visible {
 }
 .ending-restart {
   display: inline-flex;
-  min-height: 40px;
+  min-height: 44px;
   align-items: center;
-  gap: 9px;
-  margin-top: 28px;
-  padding: 0 16px;
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  gap: 10px;
+  padding: 0 20px;
+  border: 0;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--accent);
+  box-shadow: 0 4px 0 #c52c58, 0 8px 20px rgba(202, 55, 99, 0.2);
   color: white;
   cursor: pointer;
+  font-family: var(--display);
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 900;
 }
 .ending-restart svg {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
 }
 
 @media (max-width: 640px) {
@@ -1945,7 +2095,7 @@ a:focus-visible {
   .login-card {
     min-height: 0;
     grid-template-columns: 1fr;
-    grid-template-rows: clamp(145px, 26svh, 174px) auto;
+    grid-template-rows: clamp(200px, 38svh, 260px) auto;
     border-width: 4px;
     border-radius: 20px;
   }
@@ -1953,11 +2103,17 @@ a:focus-visible {
     grid-row: 1;
     border-left: 0;
     border-bottom: 1px solid rgba(40, 49, 95, 0.08);
-    scale: 0.6x;
   }
   .login-art-stamp {
-    right: 12px;
     bottom: 12px;
+    right: 12px;
+  }
+  .stamp-day {
+    font-size: clamp(28px, 9vw, 40px);
+  }
+  .stamp-month {
+    font-size: 9px;
+    letter-spacing: 0.24em;
   }
   .login-content {
     grid-row: 2;
@@ -1984,10 +2140,10 @@ a:focus-visible {
     row-gap: 16px;
     padding-bottom: 6px;
   }
-  .memory-photo,
+    .memory-photo,
   .memory-quiet .memory-photo,
   .memory-close .memory-photo {
-    height: clamp(140px, 23svh, 158px);
+    height: clamp(220px, 38svh, 300px);
   }
   .caption-main {
     font-size: 19px;
@@ -2010,10 +2166,10 @@ a:focus-visible {
   .chapter-indicator {
     max-width: 72px;
   }
-  .memory-photo,
+    .memory-photo,
   .memory-quiet .memory-photo,
   .memory-close .memory-photo {
-    height: clamp(140px, 23svh, 158px);
+    height: clamp(200px, 34svh, 270px);
   }
 }
 
@@ -2054,12 +2210,15 @@ a:focus-visible {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-  background-color: rgba(255, 250, 240, 0.78);
+  backdrop-filter: blur(28px) saturate(1.4);
+  -webkit-backdrop-filter: blur(28px) saturate(1.4);
+  background-color: rgba(255, 248, 232, 0.65);
   box-shadow: 0 1px 16px rgba(0, 0, 0, 0.15);
   animation: fade-in 0.25s ease both;
   overflow: hidden;
+}
+.video-lightbox::before {
+  display: none;
 }
 
 .coverflow-top-bar,
@@ -2144,13 +2303,12 @@ a:focus-visible {
 
 .lightbox-nav {
   position: absolute;
-  top: 48%;
+  top: calc(clamp(320px, 56vh, 520px) + 14px);
   z-index: 10020;
-  transform: translateY(-50%);
   display: grid;
   place-items: center;
-  width: clamp(44px, 5.2vw, 56px);
-  height: clamp(44px, 5.2vw, 56px);
+  width: clamp(40px, 5vw, 50px);
+  height: clamp(40px, 5vw, 50px);
   border-radius: 50%;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -2164,7 +2322,7 @@ a:focus-visible {
 
 .lightbox-nav:hover:not(:disabled) {
   background-color: #ffffff;
-  transform: translateY(-50%) scale(1.1);
+  transform: scale(1.1);
   box-shadow: 0 8px 24px rgba(40, 49, 95, 0.2);
 }
 
@@ -2191,7 +2349,7 @@ a:focus-visible {
 .coverflow-stage {
   position: relative;
   width: 100%;
-  height: min(78vh, 650px);
+  height: min(82vh, 680px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2204,7 +2362,7 @@ a:focus-visible {
 .coverflow-track {
   position: relative;
   width: 100%;
-  height: clamp(260px, 48vh, 420px);
+  height: clamp(320px, 56vh, 520px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2213,8 +2371,8 @@ a:focus-visible {
 
 .coverflow-card {
   position: absolute;
-  width: clamp(240px, 44vw, 420px);
-  aspect-ratio: 1 / 1;
+  width: clamp(260px, 58vw, 480px);
+  aspect-ratio: 1 / 1.05;
   border-radius: 20px;
   cursor: pointer;
   transform-style: preserve-3d;
@@ -2230,15 +2388,38 @@ a:focus-visible {
   height: 100%;
   border-radius: 20px;
   overflow: hidden;
-  border: 5px solid #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.7);
   box-shadow:
     0 20px 48px rgba(40, 49, 95, 0.18),
     0 4px 14px rgba(40, 49, 95, 0.08);
-  background: #ffffff;
+  background: transparent;
 }
-
+/* morphed image bleed for coverflow */
+.coverflow-card-inner::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background-image: var(--img-src);
+  background-size: cover;
+  background-position: center;
+  filter: blur(30px) saturate(1.7) brightness(1.02);
+  transform: scale(1.1);
+  z-index: 0;
+  border-radius: inherit;
+}
+.coverflow-card-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(ellipse at center, transparent 35%, rgba(20, 20, 40, 0.18) 100%);
+}
 .coverflow-card img {
-  object-fit: cover;
+  position: relative;
+  z-index: 2;
+  object-fit: contain;
 }
 
 /* Active Center Card */
@@ -2264,8 +2445,8 @@ a:focus-visible {
 /* Mobile Cover Flow Adjustments */
 @media (max-width: 640px) {
   .coverflow-card {
-    width: 68vw;
-    max-width: 290px;
+    width: 82vw;
+    max-width: 340px;
   }
   .coverflow-card.is-active {
     transform: translateX(0) translateZ(90px) rotateY(0deg) scale(1.02);
@@ -2277,6 +2458,12 @@ a:focus-visible {
   .coverflow-card.is-right {
     transform: translateX(calc(75px + var(--abs-offset) * 38px))
       translateZ(calc(-40px - var(--abs-offset) * 30px)) rotateY(-52deg);
+  }
+  /* on mobile track is shorter, push arrows down less */
+  .lightbox-nav {
+    top: calc(clamp(300px, 56vh, 440px) + 5px);
+    width: 40px;
+    height: 40px;
   }
 }
 

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import {
@@ -49,7 +49,6 @@ export function GiftExperience() {
   const [loginError, setLoginError] = useState("");
   const swipeStart = useRef<{ x: number; y: number } | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const pageAudioRef = useRef<HTMLAudioElement>(null);
 
   const goTo = useCallback((nextChapter: Chapter) => {
     if (nextChapter === "memories") setMemoryIndex(0);
@@ -58,15 +57,6 @@ export function GiftExperience() {
     setChapter(nextChapter);
     setConfettiKey((key) => key + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
-    // auto-play page audio when reaching the trigger chapter
-    if (
-      giftContent.pageAudioUrl &&
-      nextChapter === giftContent.pageAudioTrigger
-    ) {
-      setTimeout(() => {
-        pageAudioRef.current?.play().catch(() => {});
-      }, 600);
-    }
   }, []);
 
   const goToPreviousChapter = useCallback(() => {
@@ -217,18 +207,14 @@ export function GiftExperience() {
             aria-label="A colorful birthday cake illustration with the date 11th November printed on the canvas"
           >
             <Image
-              src="/4.jpeg"
+              src="./4.jpeg"
               alt=""
               fill
               priority
               sizes="(max-width: 600px) 100vw, 380px"
             />
             <span className="login-art-stamp" aria-hidden="true">
-              <span className="stamp-day">
-                {birthdayDayParts?.[1] ?? birthdayDay}
-                {birthdayDayParts?.[2] && <sup className="stamp-ord">{birthdayDayParts[2]}</sup>}
-              </span>
-              <span className="stamp-month">{birthdayMonth}</span>
+              {giftContent.birthdayDate}
             </span>
           </div>
         </section>
@@ -276,13 +262,6 @@ export function GiftExperience() {
         loop
         preload="none"
       />
-      {giftContent.pageAudioUrl && (
-        <audio
-          ref={pageAudioRef}
-          src={giftContent.pageAudioUrl}
-          preload="none"
-        />
-      )}
       {confettiKey > 0 && (
         <div className="confetti-burst" key={confettiKey} aria-hidden="true">
           {confettiPieces.map((piece) => (
@@ -453,18 +432,26 @@ export function GiftExperience() {
               DEAR {giftContent.recipient.toUpperCase()},
             </p>
             <h2 id="note-title" className="note-line" key={noteLine}>
-              {giftContent.note[noteLine].heading}
+              {giftContent.note[noteLine]}
             </h2>
             <div className="note-lower">
-              <p className="note-body" key={`body-${noteLine}`}>
-                {giftContent.note[noteLine].body}
-              </p>
-            </div>
-            <p className="note-footer" key={`footer-${noteLine}`}>
-              {giftContent.note[noteLine].footer}
-            </p>
+              <span className="handwritten-mark">
+                <pre>
+                You are my best friend, my greatest<br></br>
+                confidant, and the love of my life.<br></br>
+                With you, I've found my forever<br></br>
+                and my always.<br></br>
+                I am so grateful for every moment we share,<br></br>
+                and every moment we make. <br></br>
+                You are my heart, my soul, my everything.
+                </pre>
+              </span>
+ </div>
+ {giftContent.noteFooter && (
+ <p className=note-footer>{giftContent.noteFooter}</p>
+ )}
  <div
- className="line-progress"
+ className=line-progress
               aria-label={`Note, line ${noteLine + 1} of ${giftContent.note.length}`}
             >
               {giftContent.note.map((_, index) => (
@@ -647,7 +634,7 @@ export function GiftExperience() {
               className="memory-photo"
               key={memoryIndex}
               onClick={() => setShowPhoto(true)}
-              style={{ cursor: "zoom-in", "--img-src": `url(${memory.image})` } as React.CSSProperties}
+              style={{ cursor: "zoom-in" }}
             >
               <Image
                 src={memory.image}
@@ -803,10 +790,7 @@ export function GiftExperience() {
                           setMemoryIndex(i);
                         }}
                       >
-                        <div
-                          className="coverflow-card-inner"
-                          style={{ "--img-src": `url(${mem.image})` } as React.CSSProperties}
-                        >
+                        <div className="coverflow-card-inner">
                           <Image
                             src={mem.image}
                             alt={mem.alt}
@@ -850,43 +834,34 @@ export function GiftExperience() {
 
       {chapter === "ending" && (
         <section className="ending-scene" aria-labelledby="ending-title">
-          {/* full-bleed background photo */}
           <div className="ending-memory">
             <Image
               src={memory.image}
               alt={memory.alt}
               fill
-              sizes="100vw"
+              sizes="(max-width: 760px) 100vw, 100vw"
               priority
             />
           </div>
-          {/* layered gradient wash */}
           <div className="ending-wash" />
-
-          {/* floating content — no card box */}
           <div className="ending-message">
-            <p className="ending-eyebrow">
-              <span className="ending-eyebrow-line" />
-              <span>AND MOST OF ALL</span>
-              <span className="ending-eyebrow-line" />
-            </p>
+            <p className="eyebrow">AND MOST OF ALL</p>
             <h2 id="ending-title">
-              Happy<br />birthday,
+              Happy birthday,
+              <br />
+              <em>{giftContent.recipient}.</em>
             </h2>
-            <p className="ending-name">{giftContent.recipient}.</p>
+            <span className="ending-rule" />
             <p className="signoff">{giftContent.signoff}</p>
-            <p className="signature">— {giftContent.sender}</p>
-            <div className="ending-actions">
-              <button
-                className="ending-restart"
-                type="button"
-                onClick={() => goTo("cover")}
-              >
-                <span>Relive it again</span>
-                <ArrowRight aria-hidden="true" />
-              </button>
-            </div>
-            <p className="ending-footnote">Made with love · {giftContent.birthdayDate}</p>
+            <p className="signature">{giftContent.sender}</p>
+            <button
+              className="ending-restart"
+              type="button"
+              onClick={() => goTo("cover")}
+            >
+              Start over <ArrowRight aria-hidden="true" />
+            </button>
+            <p className="ending-footnote">Enjoy your day</p>
           </div>
         </section>
       )}
@@ -913,3 +888,4 @@ export function GiftExperience() {
 }
 
 export default GiftExperience;
+
