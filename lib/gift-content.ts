@@ -7,14 +7,14 @@ export type Memory = {
 }
 
 export const giftContent = {
-  recipient: 'Ravi Shankar Jha',
+  recipient: 'RAVI SHANKAR JHA',
   sender: 'Manu',
   birthdayDate: '11th NOV',
   password: 'birthday',
   openingLine: 'A big birthday hug, a few happy memories, and a little surprise.',
   note: [
-    '[Add a first line that sounds like you.]',
-    '[A favorite shared story, in your own words.]',
+    'To My Wonderful Husband',
+    '[You are my best friend]',
     '[The thing you want him to remember long after today.]',
   ],
   video: {
@@ -25,7 +25,7 @@ export const giftContent = {
   },
   memories: [
     {
-      image: '/memory-evening.png',
+      image: '3.jpeg',
       alt: 'A bright backyard birthday table with cake, balloons, and confetti',
       caption: '[A moment you still think about]',
       note: '[Add a date, an inside joke, or leave this one without a caption.]',

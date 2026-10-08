@@ -155,11 +155,11 @@ export function GiftExperience() {
         <section className="login-card" aria-labelledby="login-title">
           <div className="login-content">
             <h1 id="login-title">
-              You&apos;re invited,
+              You&apos;re INVITED,
               <br />
               <span>{giftContent.recipient}!</span>
             </h1>
-            <p className="login-intro">Your birthday surprise is waiting.</p>
+            <p className="login-intro">A surprise is waiting for YOU.</p>
             <form className="login-form" onSubmit={handleLogin}>
               <label htmlFor="birthday-password">Password</label>
               <div className="password-field">
@@ -207,11 +207,11 @@ export function GiftExperience() {
             aria-label="A colorful birthday cake illustration with the date 11th November printed on the canvas"
           >
             <Image
-              src="/birthday-cover.png"
+              src="./4.jpeg"
               alt=""
               fill
               priority
-              sizes="(max-width: 640px) 100vw, 380px"
+              sizes="(max-width: 600px) 100vw, 380px"
             />
             <span className="login-art-stamp" aria-hidden="true">
               {giftContent.birthdayDate}
@@ -436,7 +436,15 @@ export function GiftExperience() {
             </h2>
             <div className="note-lower">
               <span className="handwritten-mark">
-                A little pause, between the lines.
+                <pre>
+                You are my best friend, my greatest<br></br>
+                confidant, and the love of my life.<br></br>
+                With you, I've found my forever<br></br>
+                and my always.<br></br>
+                I am so grateful for every moment we share,<br></br>
+                and every moment we make. <br></br>
+                You are my heart, my soul, my everything.
+                </pre>
               </span>
             </div>
             <div
