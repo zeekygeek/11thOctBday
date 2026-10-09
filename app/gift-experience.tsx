@@ -381,7 +381,7 @@ export function GiftExperience() {
               <ArrowRight aria-hidden="true" />
             </button>
             <p className="cover-whisper">
-              Cake calories don&apos;t count today.
+              <br />
             </p>
           </div>
           <div className="cover-art-wrap">
@@ -425,12 +425,6 @@ export function GiftExperience() {
               </div>
             </div>
             <span className="art-side-note">A whole lot of happy.</span>
-          </div>
-          <div className="cover-bottom">
-            <span>TAKE YOUR TIME</span>
-            <span>
-              SCROLL ISN&apos;T REQUIRED <ArrowDown aria-hidden="true" />
-            </span>
           </div>
         </section>
       )}
@@ -873,7 +867,7 @@ export function GiftExperience() {
             <h2 id="ending-title">
               Happy<br />birthday,
             </h2>
-            <p className="ending-name">{giftContent.recipient}.</p>
+            <p className="ending-name">Ravi Ji.</p>
             <p className="signoff">{giftContent.signoff}</p>
             <p className="signature">— {giftContent.sender}</p>
             <div className="ending-actions">
@@ -886,14 +880,14 @@ export function GiftExperience() {
                 <ArrowRight aria-hidden="true" />
               </button>
             </div>
-            <p className="ending-footnote">Made with love · {giftContent.birthdayDate}</p>
+            <p className="ending-footnote">with love · {giftContent.birthdayDate}</p>
           </div>
         </section>
       )}
 
       {!showPhoto && !showVideo && (
       <footer className="gift-footer">
-        <span>MADE FOR {giftContent.recipient.toUpperCase()}</span>
+        <span>FOR {giftContent.recipient.toUpperCase()}</span>
         <div
           className="footer-progress"
           aria-label={`Chapter ${chapterProgress + 1} of ${chapters.length}`}
