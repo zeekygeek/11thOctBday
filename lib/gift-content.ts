@@ -16,7 +16,7 @@ export const giftContent = {
   recipient: 'RAVI SHANKAR JHA',
   sender: 'Manu',
   birthdayDate: '11th NOV',
-  password: 'birthday',
+  password: process.env.NEXT_PUBLIC_GIFT_PASSWORD || 'birthday',
   openingLine: 'A big birthday hug, a few happy memories, and a little surprise.',
   note: [
     {
