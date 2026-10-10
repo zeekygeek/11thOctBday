@@ -37,9 +37,9 @@ export const giftContent = {
   ] satisfies NoteCard[],
   video: {
     src: '',
-    poster: '/memory-evening.png',
+    poster: '/set2/10.jpeg',
     title: 'A little film',
-    description: 'Hit play for your very own birthday mini-movie.',
+    description: '',
   },
   memories: [
     {
@@ -116,15 +116,15 @@ export const giftContent = {
   ] satisfies Memory[],
   noteFooter: '',  // per-card footer is now inside each NoteCard
   signoff: 'Enjoy your day',
-  videoUrl: '',
+  videoUrl: '/video/bdayVideo.mp4',
   musicUrl: '',
   // ── Per-page audio ──────────────────────────────────────────────────────
   // Drop an audio file in /public and set the path here.
   // Set pageAudioTrigger to the chapter where it should auto-play:
   //   'cover' | 'note' | 'film' | 'memories' | 'ending'
   // Leave pageAudioUrl empty to disable.
-  pageAudioUrl: '',          // e.g. '/audio/happy-birthday.mp3'
-  pageAudioTrigger: 'ending' as 'cover' | 'note' | 'film' | 'memories' | 'ending',
+  pageAudioUrl: '/audio/bday.mp3',
+  pageAudioTrigger: 'note' as 'cover' | 'note' | 'film' | 'memories' | 'ending',
 }
 
 export type GiftContent = typeof giftContent

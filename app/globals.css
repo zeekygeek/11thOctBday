@@ -43,6 +43,13 @@ body {
 button,
 a {
   font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+button:active,
+a:active {
+  opacity: 1 !important;
+  background-color: unset;
+  filter: none;
 }
 button {
   color: inherit;
@@ -2499,7 +2506,7 @@ a:focus-visible {
 
 /* Cinema Lightbox for Film Fullscreen */
 .cinema-lightbox {
-  padding: clamp(20px, 4vh, 48px) clamp(16px, 4vw, 40px);
+  padding: 0;
 }
 
 .cinema-frame {

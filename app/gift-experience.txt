@@ -526,11 +526,6 @@ export function GiftExperience() {
                       YOUR FILM GOES HERE
                     </span>
                   )}
-                  <span className="film-frame-note">
-                    {giftContent.videoUrl
-                      ? "TAKE A BREATH. PRESS PLAY."
-                      : "ADD A VIDEO URL IN lib/gift-content.ts"}
-                  </span>
                 </button>
                 <div className="film-footer">
                   <span>Just you, me, and a few seconds.</span>

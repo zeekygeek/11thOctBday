@@ -58,14 +58,15 @@ export function GiftExperience({ password: correctPassword }: { password: string
     setChapter(nextChapter);
     setConfettiKey((key) => key + 1);
     window.scrollTo({ top: 0, behavior: "smooth" });
-    // auto-play page audio when reaching the trigger chapter
-    if (
-      giftContent.pageAudioUrl &&
-      nextChapter === giftContent.pageAudioTrigger
-    ) {
-      setTimeout(() => {
+    if (giftContent.pageAudioUrl) {
+      if (nextChapter === giftContent.pageAudioTrigger) {
         pageAudioRef.current?.play().catch(() => {});
-      }, 600);
+      } else {
+        if (pageAudioRef.current) {
+          pageAudioRef.current.pause();
+          pageAudioRef.current.currentTime = 0;
+        }
+      }
     }
   }, []);
 
@@ -533,14 +534,8 @@ export function GiftExperience({ password: correctPassword }: { password: string
                       YOUR FILM GOES HERE
                     </span>
                   )}
-                  <span className="film-frame-note">
-                    {giftContent.videoUrl
-                      ? "TAKE A BREATH. PRESS PLAY."
-                      : "ADD A VIDEO URL IN lib/gift-content.ts"}
-                  </span>
                 </button>
                 <div className="film-footer">
-                  <span>Just you, me, and a few seconds.</span>
                 </div>
                 <button
                   className="scene-next"
@@ -574,7 +569,6 @@ export function GiftExperience({ password: correctPassword }: { password: string
                 </button>
               </div>
               <div
-                className="cinema-frame"
                 onClick={(event) => event.stopPropagation()}
               >
                 {giftContent.videoUrl ? (
@@ -586,6 +580,7 @@ export function GiftExperience({ password: correctPassword }: { password: string
                     onEnded={() =>
                       window.setTimeout(() => setShowVideo(false), 1600)
                     }
+                    style={{ maxWidth: "100%", maxHeight: "90svh", display: "block" }}
                   />
                 ) : (
                   <div className="cinema-placeholder">
