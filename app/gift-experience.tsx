@@ -35,7 +35,7 @@ const confettiPieces = Array.from({ length: 44 }, (_, index) => ({
   color: ["pink", "yellow", "mint", "orange", "blue"][index % 5],
 }));
 
-export function GiftExperience() {
+export function GiftExperience({ password: correctPassword }: { password: string }) {
   const [chapter, setChapter] = useState<Chapter>("cover");
   const [noteLine, setNoteLine] = useState(0);
   const [memoryIndex, setMemoryIndex] = useState(0);
@@ -130,7 +130,7 @@ export function GiftExperience() {
 
   const handleLogin = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (password === giftContent.password) {
+    if (password === correctPassword) {
       setLoginError("");
       setIsUnlocked(true);
       setConfettiKey((key) => key + 1);
